@@ -13,6 +13,8 @@ type Package struct {
 	InstalledDate string
 }
 
+const installedDateFormat = "2006-01-02"
+
 type installEntry struct {
 	Time               int64 `json:"time"`
 	InstalledOnRequest bool  `json:"installed_on_request"`
@@ -52,17 +54,20 @@ func FetchPackages() ([]Package, error) {
 func filterOnRequest(formulae []formula) []Package {
 	var pkgs []Package
 	for _, f := range formulae {
+
 		if len(f.Installed) == 0 {
 			continue
 		}
+
 		if !f.Installed[0].InstalledOnRequest {
 			continue
 		}
 		pkgs = append(pkgs, Package{
 			Name:          f.Name,
-			InstalledDate: time.Unix(f.Installed[0].Time, 0).Format("2006-01-02"),
+			InstalledDate: time.Unix(f.Installed[0].Time, 0).Format(installedDateFormat),
 		})
 	}
+
 	return pkgs
 }
 
@@ -74,7 +79,7 @@ func filterAllInstalled(formulae []formula) []Package {
 		}
 		pkgs = append(pkgs, Package{
 			Name:          f.Name,
-			InstalledDate: time.Unix(f.Installed[0].Time, 0).Format("2006-01-02"),
+			InstalledDate: time.Unix(f.Installed[0].Time, 0).Format(installedDateFormat),
 		})
 	}
 	return pkgs

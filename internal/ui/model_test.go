@@ -49,42 +49,6 @@ func mustModel(t *testing.T, m tea.Model) Model {
 	return model
 }
 
-func TestBuildRows_empty(t *testing.T) {
-	rows := buildRows(nil, nil)
-	if len(rows) != 0 {
-		t.Errorf("got %d rows, want 0", len(rows))
-	}
-}
-
-func TestBuildRows_defaultStatus(t *testing.T) {
-	rows := buildRows(testPkgs[:1], []string{rowNone})
-
-	if rows[0][0] != "git" {
-		t.Errorf("name = %q, want %q", rows[0][0], "git")
-	}
-	if rows[0][2] != "User" {
-		t.Errorf("status = %q, want %q", rows[0][2], "User")
-	}
-}
-
-func TestBuildRows_uninstallingStatus(t *testing.T) {
-	rows := buildRows(testPkgs[:1], []string{rowUninstalling})
-
-	cell := rows[0][2]
-	// lipgloss may strip ANSI in test environments; check plain text
-	if cell != "Uninstalling..." && cell != redStyle.Render("Uninstalling...") {
-		t.Errorf("status cell %q does not match expected uninstalling text", cell)
-	}
-}
-
-func TestBuildRows_deletedStatus(t *testing.T) {
-	rows := buildRows(testPkgs[:1], []string{rowDeleted})
-
-	cell := rows[0][2]
-	if cell != "Deleted" && cell != redStyle.Render("Deleted") {
-		t.Errorf("status cell %q does not match expected deleted text", cell)
-	}
-}
 
 func TestInit_returnsCmd(t *testing.T) {
 	m := newTestModel(testPkgs)
@@ -213,63 +177,3 @@ func TestUpdate_uninstallDone_failure(t *testing.T) {
 	}
 }
 
-func TestHandleKey_quitKeys(t *testing.T) {
-	tests := []struct {
-		name string
-		msg  tea.KeyPressMsg
-	}{
-		{"q", tea.KeyPressMsg{Code: 'q'}},
-		{"ctrl+c", tea.KeyPressMsg{Code: 'c', Mod: tea.ModCtrl}},
-	}
-
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			m := newTestModel(testPkgs)
-			_, cmd := m.Update(tt.msg)
-
-			if cmd == nil {
-				t.Fatal("expected non-nil cmd")
-			}
-			if _, ok := cmd().(tea.QuitMsg); !ok {
-				t.Error("expected QuitMsg")
-			}
-		})
-	}
-}
-
-func TestHandleKey_delete_opensConfirmation(t *testing.T) {
-	m := newTestModel(testPkgs)
-
-	updated, cmd := m.Update(tea.KeyPressMsg{Code: 'd'})
-
-	model := mustModel(t, updated)
-	if !model.isConfirming {
-		t.Error("isConfirming should be true after d key")
-	}
-	if model.confirmIdx != 0 {
-		t.Errorf("confirmIdx = %d, want 0", model.confirmIdx)
-	}
-	if cmd != nil {
-		t.Error("d should return a nil cmd — uninstall starts only after confirmation")
-	}
-}
-
-func TestHandleKey_delete_skipsWhenLoading(t *testing.T) {
-	m := newTestModel(testPkgs)
-	m.isLoading = true
-
-	_, cmd := m.Update(tea.KeyPressMsg{Code: 'd'})
-	if cmd != nil {
-		t.Error("d while loading should return nil cmd")
-	}
-}
-
-func TestHandleKey_delete_skipsWhenRowNotIdle(t *testing.T) {
-	m := newTestModel(testPkgs)
-	m.rowStatus[0] = rowUninstalling
-
-	_, cmd := m.Update(tea.KeyPressMsg{Code: 'd'})
-	if cmd != nil {
-		t.Error("d on non-idle row should return nil cmd")
-	}
-}

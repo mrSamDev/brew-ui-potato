@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  build:
+    desc: Build the binary
+    cmds:
+      - go build -o bin/brew-ui ./main.go
+
+  test:
+    desc: Run all tests
+    cmds:
+      - go test -race ./...
+
+  run:
+    desc: Run the application
+    cmds:
+      - go run ./main.go
