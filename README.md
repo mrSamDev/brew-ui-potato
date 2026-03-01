@@ -1,5 +1,9 @@
 # brew-potato
 
+[![Go Version](https://img.shields.io/badge/go-1.21+-00ADD8?logo=go&logoColor=white)](https://go.dev/)
+[![License](https://img.shields.io/badge/license-do%20what%20you%20want-875fff)](LICENSE)
+[![GitHub](https://img.shields.io/badge/github-brew--potato-181717?logo=github)](https://github.com/mrSamDev/brew-potato)
+
 A terminal UI for managing Homebrew packages, built with [Bubble Tea](https://github.com/charmbracelet/bubbletea).
 
 ## Why
@@ -64,3 +68,7 @@ brew-ui/
 | `↑` / `↓` | Navigate packages  |
 | `d`       | Uninstall selected |
 | `q`       | Quit               |
+
+## License
+
+Do what every you want with it.
