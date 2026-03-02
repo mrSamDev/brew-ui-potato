@@ -15,6 +15,7 @@ const (
 
 	colWidthPackage   = 32
 	colWidthInstalled = 14
+	colWidthType      = 10
 	colWidthStatus    = 14
 
 	initialHeight = 20
@@ -56,6 +57,7 @@ func InitialModel() Model {
 	columns := []table.Column{
 		{Title: "Package", Width: colWidthPackage},
 		{Title: "Installed", Width: colWidthInstalled},
+		{Title: "Type", Width: colWidthType},
 		{Title: "Status", Width: colWidthStatus},
 	}
 
@@ -86,16 +88,18 @@ func buildRows(pkgs []brew.Package, status []string) []table.Row {
 			rows[i] = table.Row{
 				redStyle.Render(p.Name),
 				redStyle.Render(p.InstalledDate),
+				redStyle.Render(p.Type),
 				redStyle.Render("Uninstalling..."),
 			}
 		case rowDeleted:
 			rows[i] = table.Row{
 				redStyle.Render(p.Name),
 				redStyle.Render(p.InstalledDate),
+				redStyle.Render(p.Type),
 				redStyle.Render("Deleted"),
 			}
 		default:
-			rows[i] = table.Row{p.Name, p.InstalledDate, "User"}
+			rows[i] = table.Row{p.Name, p.InstalledDate, p.Type, ""}
 		}
 	}
 	return rows
@@ -122,7 +126,7 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
-		m.table.SetWidth(colWidthPackage + colWidthInstalled + colWidthStatus)
+		m.table.SetWidth(colWidthPackage + colWidthInstalled + colWidthType + colWidthStatus)
 		m.table.SetHeight(msg.Height - heightOffset)
 		return m, nil
 	case packagesLoadedMsg:
