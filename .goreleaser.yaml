@@ -48,7 +48,7 @@ checksum:
 release:
   github:
     owner: mrSamDev
-    name: brew-ui-potato
+    name: brew-potato
   prerelease: auto
 
 homebrew_casks:
@@ -57,7 +57,7 @@ homebrew_casks:
       - brew-ui-darwin-archive
     binaries:
       - brew-potato
-    homepage: "https://github.com/mrSamDev/brew-ui-potato"
+    homepage: "https://github.com/mrSamDev/brew-potato"
     description: "Terminal UI for managing Homebrew packages."
     directory: Casks
     repository:

@@ -77,8 +77,7 @@ This repo is configured for GoReleaser v2 (`.goreleaser.yaml`) and GitHub Action
 
 1. Create the tap repo (or change `.goreleaser.yaml` to your own):
    - `mrSamDev/homebrew-tap`
-2. Add GitHub secret in this repo:
-   - `GH_PAT`: a Personal Access Token with `repo` scope and write access to the tap repo
+
 
 ### Create a release
 
@@ -91,7 +90,7 @@ git push origin v0.1.0
 
 That tag triggers the `Release` workflow and publishes:
 
-- GitHub release artifacts in `mrSamDev/brew-ui-potato`
+- GitHub release artifacts in `mrSamDev/brew-potato`
 - `Casks/brew-potato.rb` in `mrSamDev/homebrew-tap`
 
 ### Install via Homebrew

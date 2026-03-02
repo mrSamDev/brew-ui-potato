@@ -1,4 +1,4 @@
-module github.com/mrSamDev/brew-ui-potato
+module github.com/mrSamDev/brew-potato
 
 go 1.24.4
 

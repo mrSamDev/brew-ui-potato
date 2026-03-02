@@ -3,7 +3,7 @@ package ui
 import (
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/mrSamDev/brew-ui-potato/internal/brew"
+	"github.com/mrSamDev/brew-potato/internal/brew"
 )
 
 func (m Model) handleKey(msg tea.KeyPressMsg) (tea.Model, tea.Cmd) {

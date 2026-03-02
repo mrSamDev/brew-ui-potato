@@ -8,7 +8,7 @@ import (
 	"charm.land/bubbles/v2/table"
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/mrSamDev/brew-ui-potato/internal/brew"
+	"github.com/mrSamDev/brew-potato/internal/brew"
 )
 
 var testPkgs = []brew.Package{
@@ -48,7 +48,6 @@ func mustModel(t *testing.T, m tea.Model) Model {
 	}
 	return model
 }
-
 
 func TestInit_returnsCmd(t *testing.T) {
 	m := newTestModel(testPkgs)
@@ -176,4 +175,3 @@ func TestUpdate_uninstallDone_failure(t *testing.T) {
 		t.Error("isLoading should be false after uninstall failure")
 	}
 }
-

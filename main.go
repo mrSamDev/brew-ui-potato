@@ -6,7 +6,7 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/mrSamDev/brew-ui-potato/internal/ui"
+	"github.com/mrSamDev/brew-potato/internal/ui"
 )
 
 func main() {
