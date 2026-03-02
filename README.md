@@ -65,39 +65,11 @@ brew-ui/
 └── go.sum
 ```
 
-## Release With Homebrew (GoReleaser)
-
-This repo is configured for GoReleaser v2 (`.goreleaser.yaml`) and GitHub Actions (`.github/workflows/release.yml`) to:
-
-- build release binaries for macOS and Linux
-- create GitHub release assets + checksums
-- publish a Homebrew cask into a tap repo (`mrSamDev/homebrew-tap`)
-
-### One-time setup
-
-1. Create the tap repo (or change `.goreleaser.yaml` to your own):
-   - `mrSamDev/homebrew-tap`
-
-
-### Create a release
-
-Version comes from the Git tag you push (for example `v0.1.0`):
-
-```sh
-git tag v0.1.0
-git push origin v0.1.0
-```
-
-That tag triggers the `Release` workflow and publishes:
-
-- GitHub release artifacts in `mrSamDev/brew-potato`
-- `Casks/brew-potato.rb` in `mrSamDev/homebrew-tap`
 
 ### Install via Homebrew
 
 ```sh
-brew tap mrSamDev/homebrew-tap
-brew install --cask brew-potato
+brew install mrSamDev/tap/brew-potato
 ```
 
 ## Keybindings
