@@ -65,9 +65,12 @@ brew-ui/
 └── go.sum
 ```
 
-## Next Steps
 
-[GoReleaser](https://github.com/goreleaser/goreleaser) can publish brew-potato as an actual Homebrew formula so anyone can install it with `brew install`. It handles cross-compilation, GitHub release assets, and writing the formula to a tap repo automatically.
+### Install via Homebrew
+
+```sh
+brew install mrSamDev/tap/brew-potato
+```
 
 ## Keybindings
 

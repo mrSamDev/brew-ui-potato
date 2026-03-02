@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mrSamDev/brew-ui-potato/internal/brew"
+	"github.com/mrSamDev/brew-potato/internal/brew"
 )
 
 // brewJSONMultiple contains four formulae that exercise all filter paths:

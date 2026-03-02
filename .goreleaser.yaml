@@ -1,0 +1,47 @@
+project_name: brew-potato
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: brew-potato
+    main: .
+    binary: brew-potato
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: mrSamDev
+    name: brew-potato
+
+brews:
+  - name: brew-potato
+    homepage: https://github.com/mrSamDev/brew-potato
+    description: A cute TUI for managing Homebrew apps
+    license: MIT
+
+    repository:
+      owner: mrSamDev
+      name: homebrew-tap
+      token: "{{ .Env.GITHUB_TOKEN }}"
+
+    commit_author:
+      name: mrSamDev
+      email: dev.sijo.sam@gmail.com
+
+    directory: Formula
+
+    install: |
+      bin.install "brew-potato"

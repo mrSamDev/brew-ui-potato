@@ -5,7 +5,7 @@ import (
 	"charm.land/bubbles/v2/table"
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/mrSamDev/brew-ui-potato/internal/brew"
+	"github.com/mrSamDev/brew-potato/internal/brew"
 )
 
 const (
