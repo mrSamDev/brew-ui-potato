@@ -17,3 +17,11 @@ tasks:
     desc: Run the application
     cmds:
       - go run ./main.go
+
+  deploy:
+    desc: "Tag and push a release (usage: task deploy VERSION=v1.2.3)"
+    cmds:
+      - git tag {{.VERSION}}
+      - git push origin {{.VERSION}}
+    requires:
+      vars: [VERSION]
